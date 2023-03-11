@@ -10,6 +10,9 @@ const GameBoard = () => {
     (state: RootState) => state.mineSweeper.difficulty
   );
   const cells = useSelector((state: RootState) => state.mineSweeper.cells);
+  const gameOverState = useSelector(
+    (state: RootState) => state.mineSweeper.gameOver
+  );
 
   useEffect(() => {
     dispatch(makeBoard());

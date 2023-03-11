@@ -1,9 +1,10 @@
 import { useDispatch } from "react-redux";
+import { Bomb } from "../icon/Icons";
 import { clickCell } from "../store/minesweeper/mineSweeperSlice";
 import { CellType } from "../type/types";
 
 const Cell = ({ cellData }: { cellData: CellType }) => {
-  const { row, col, isClicked } = cellData;
+  const { row, col, isClicked, isMine } = cellData;
   const dispatch = useDispatch();
 
   const clickHandler = () => {
@@ -16,7 +17,17 @@ const Cell = ({ cellData }: { cellData: CellType }) => {
         isClicked ? `bg-slate-800` : `bg-slate-400`
       }`}
       onClick={clickHandler}
-    ></div>
+    >
+      {" "}
+      {isClicked &&
+        (isMine ? (
+          <span className="text-yellow-300">
+            <Bomb />
+          </span>
+        ) : (
+          <span>개수</span>
+        ))}
+    </div>
   );
 };
 

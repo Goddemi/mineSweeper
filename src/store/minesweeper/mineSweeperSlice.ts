@@ -6,11 +6,13 @@ import { CellType } from "../../type/types";
 export interface mineSweeperState {
   difficulty: DifficultyType;
   cells: CellType[][];
+  gameOver: boolean;
 }
 
 const initialState: mineSweeperState = {
   difficulty: "easy",
   cells: [],
+  gameOver: false,
 };
 
 export const mineSweeperSlice = createSlice({
@@ -55,10 +57,13 @@ export const mineSweeperSlice = createSlice({
     clickCell: (state, action: PayloadAction<CellType>) => {
       const { row, col } = action.payload;
       const clickedCell = state.cells[row][col];
-
       if (clickedCell.isClicked) return;
 
       clickedCell.isClicked = true;
+
+      if (clickedCell.isMine) {
+        state.gameOver = true;
+      }
     },
   },
 });
