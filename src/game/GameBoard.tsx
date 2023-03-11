@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { makeBoard } from "../store/minesweeper/mineSweeperSlice";
+import { Sad, Smile } from "../icon/Icons";
+import { makeBoard, resetGame } from "../store/minesweeper/mineSweeperSlice";
 import { RootState } from "../store/store";
 import Cell from "./Cell";
 
@@ -9,17 +10,20 @@ const GameBoard = () => {
   const difficultyLevel = useSelector(
     (state: RootState) => state.mineSweeper.difficulty
   );
-  const cells = useSelector((state: RootState) => state.mineSweeper.cells);
   const gameOverState = useSelector(
     (state: RootState) => state.mineSweeper.gameOver
   );
+  const cells = useSelector((state: RootState) => state.mineSweeper.cells);
 
   useEffect(() => {
     dispatch(makeBoard());
   }, [difficultyLevel]);
 
   return (
-    <div className="my-5">
+    <div className=" flex flex-col items-center">
+      <div className="my-5 cursor-pointer">
+        {gameOverState ? <Sad /> : <Smile />}
+      </div>
       {cells.map((row, i) => (
         <div className="flex">
           {row.map((cellData, j) => (

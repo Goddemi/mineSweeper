@@ -5,4 +5,5 @@ export interface CellType {
   col: number;
   isClicked: boolean;
   isMine: boolean;
+  nearMineCounter: number;
 }

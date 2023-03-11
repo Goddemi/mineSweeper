@@ -4,7 +4,7 @@ import { clickCell } from "../store/minesweeper/mineSweeperSlice";
 import { CellType } from "../type/types";
 
 const Cell = ({ cellData }: { cellData: CellType }) => {
-  const { row, col, isClicked, isMine } = cellData;
+  const { row, col, isClicked, isMine, nearMineCounter } = cellData;
   const dispatch = useDispatch();
 
   const clickHandler = () => {
@@ -13,7 +13,7 @@ const Cell = ({ cellData }: { cellData: CellType }) => {
 
   return (
     <div
-      className={`w-7 h-7  border-white border-2 ${
+      className={`w-7 h-7 border-white border-2 text-center cursor-pointer ${
         isClicked ? `bg-slate-800` : `bg-slate-400`
       }`}
       onClick={clickHandler}
@@ -25,7 +25,7 @@ const Cell = ({ cellData }: { cellData: CellType }) => {
             <Bomb />
           </span>
         ) : (
-          <span>개수</span>
+          <span className=" text-white">{nearMineCounter || ""}</span>
         ))}
     </div>
   );

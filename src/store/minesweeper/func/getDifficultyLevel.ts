@@ -1,8 +1,6 @@
-import { DifficultyType } from "./../../type/types";
+import { DifficultyType } from "../../../type/types";
 
-export function getDifficultyValues(
-  difficulty: DifficultyType
-): [number, number, number] {
+export const getDifficultyLevelValues = (difficulty: DifficultyType) => {
   const EASY_DIFFICULTY: [number, number, number] = [8, 8, 10];
   const NORMAL_DIFFICULTY: [number, number, number] = [16, 16, 40];
   const HARD_DIFFICULTY: [number, number, number] = [16, 32, 99];
@@ -17,4 +15,4 @@ export function getDifficultyValues(
     default:
       throw new Error(`Unknown difficulty level: ${difficulty}`);
   }
-}
+};
