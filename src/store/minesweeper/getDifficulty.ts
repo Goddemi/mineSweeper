@@ -5,7 +5,7 @@ export function getDifficultyValues(
 ): [number, number, number] {
   const EASY_DIFFICULTY: [number, number, number] = [8, 8, 10];
   const NORMAL_DIFFICULTY: [number, number, number] = [16, 16, 40];
-  const HARD_DIFFICULTY: [number, number, number] = [32, 16, 99];
+  const HARD_DIFFICULTY: [number, number, number] = [16, 32, 99];
 
   switch (difficulty) {
     case "easy":

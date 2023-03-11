@@ -6,13 +6,14 @@ import Cell from "./Cell";
 
 const GameBoard = () => {
   const dispatch = useDispatch();
+  const difficultyLevel = useSelector(
+    (state: RootState) => state.mineSweeper.difficulty
+  );
   const cells = useSelector((state: RootState) => state.mineSweeper.cells);
-
-  console.log(cells);
 
   useEffect(() => {
     dispatch(makeBoard());
-  }, []);
+  }, [difficultyLevel]);
 
   return (
     <div className="my-5">
