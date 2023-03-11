@@ -19,8 +19,8 @@ const GameBoard = () => {
     <div className="my-5">
       {cells.map((row, i) => (
         <div className="flex">
-          {row.map((cell, j) => (
-            <Cell />
+          {row.map((cellData, j) => (
+            <Cell cellData={cellData} />
           ))}
         </div>
       ))}
