@@ -1,4 +1,4 @@
-export type DifficultyType = "easy" | "normal" | "hard";
+export type DifficultyType = "easy" | "normal" | "hard" | number[];
 
 export interface CellType {
   row: number;

@@ -13,6 +13,6 @@ export const getDifficultyLevelValues = (difficulty: DifficultyType) => {
     case "hard":
       return HARD_DIFFICULTY;
     default:
-      throw new Error(`Unknown difficulty level: ${difficulty}`);
+      return difficulty;
   }
 };

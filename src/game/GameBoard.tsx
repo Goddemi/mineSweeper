@@ -24,8 +24,8 @@ const GameBoard = () => {
   }, [difficultyLevel]);
 
   return (
-    <div className=" flex flex-col items-center">
-      <div className="my-5 cursor-pointer" onClick={resetHandler}>
+    <div className="flex flex-col items-center">
+      <div className="cursor-pointer" onClick={resetHandler}>
         {gameOverState ? <Sad /> : <Smile />}
       </div>
       {cells.map((row, i) => (
