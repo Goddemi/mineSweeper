@@ -16,7 +16,13 @@ const Difficulty = () => {
   return (
     <div>
       {difficultyLevel.map((level) => (
-        <button key={level} onClick={buttonHandler}></button>
+        <button
+          key={level}
+          onClick={buttonHandler}
+          className="mx-2 p-3 bg-slate-400 text-white rounded-md cursor-pointer"
+        >
+          {level}
+        </button>
       ))}
     </div>
   );
