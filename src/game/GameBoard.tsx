@@ -25,7 +25,7 @@ const GameBoard = () => {
 
   return (
     <div className="flex flex-col items-center">
-      <div className="cursor-pointer" onClick={resetHandler}>
+      <div className="my-4 cursor-pointer" onClick={resetHandler}>
         {gameOverState ? <Sad /> : <Smile />}
       </div>
       {cells.map((row, i) => (

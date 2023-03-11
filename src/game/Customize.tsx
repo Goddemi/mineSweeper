@@ -30,13 +30,13 @@ const Customize = () => {
   };
 
   return (
-    <form className="my-3" onSubmit={submitHandler}>
+    <form className="mt-4" onSubmit={submitHandler}>
       {inputList.map((name) => (
         <input
           name={name}
           type="number"
           placeholder={name}
-          className="w-14 mx-1 border-2"
+          className="w-16 mx-1 border-2"
           onChange={customInputHandler}
         />
       ))}
