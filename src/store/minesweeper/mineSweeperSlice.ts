@@ -4,7 +4,9 @@ import { DifficultyType } from "../../type/types";
 import { getDifficultyLevelValues } from "./func/getDifficultyLevel";
 import { getNearMinesNumber } from "./func/getNearMinesNumber";
 import { CellType } from "../../type/types";
-import { openCells } from "./func/openCells";
+import { openAllCells } from "./func/openAllCells";
+import { openNearCells } from "./func/openNearCells";
+
 export interface mineSweeperState {
   difficulty: DifficultyType;
   cells: CellType[][];
@@ -75,8 +77,10 @@ export const mineSweeperSlice = createSlice({
 
       if (clickedCell.isMine) {
         state.gameOver = true;
-        openCells(state.cells);
+        openAllCells(state.cells);
         alert("you click mine. Game over");
+      } else if (clickedCell.nearMineCounter === 0) {
+        openNearCells(state.cells, row, col);
       }
     },
 

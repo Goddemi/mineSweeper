@@ -15,13 +15,17 @@ const GameBoard = () => {
   );
   const cells = useSelector((state: RootState) => state.mineSweeper.cells);
 
+  const resetHandler = () => {
+    dispatch(resetGame());
+  };
+
   useEffect(() => {
     dispatch(makeBoard());
   }, [difficultyLevel]);
 
   return (
     <div className=" flex flex-col items-center">
-      <div className="my-5 cursor-pointer">
+      <div className="my-5 cursor-pointer" onClick={resetHandler}>
         {gameOverState ? <Sad /> : <Smile />}
       </div>
       {cells.map((row, i) => (
