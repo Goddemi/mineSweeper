@@ -1,34 +1,31 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { DifficultyType } from "../../type/types";
-import { getDifficultyLevelValues } from "./func/getDifficultyLevel";
+import { getLevelValues } from "./func/getLevelValues";
 import { getNearMinesNumber } from "./func/getNearMinesNumber";
-import { CellType } from "../../type/types";
 import { openAllCells } from "./func/openAllCells";
 import { openNearCells } from "./func/openNearCells";
+import { checkWin } from "./func/checkWin";
+import { CellType } from "../../type/types";
+import { LevelType, MineSweeperType } from "../../type/types";
 
-export interface mineSweeperState {
-  difficulty: DifficultyType;
-  cells: CellType[][];
-  gameOver: boolean;
-}
-
-const initialState: mineSweeperState = {
-  difficulty: "easy",
+const initialState: MineSweeperType = {
+  level: "easy",
   cells: [],
-  gameOver: false,
+  gameState: "inPlaying",
 };
 
 export const mineSweeperSlice = createSlice({
   name: "mineSweeper",
   initialState,
   reducers: {
-    setDifficulty: (state, action: PayloadAction<DifficultyType>) => {
-      state.difficulty = action.payload;
+    setLevel: (state, action: PayloadAction<LevelType>) => {
+      state.level = action.payload;
     },
 
     makeBoard: (state) => {
-      const [rows, cols, mines] = getDifficultyLevelValues(state.difficulty);
+      state.gameState = "inPlaying";
+
+      const [rows, cols, mines] = getLevelValues(state.level);
 
       //난이도에 따른 보드판 생성
       const cells: CellType[][] = [];
@@ -76,12 +73,14 @@ export const mineSweeperSlice = createSlice({
       clickedCell.isClicked = true;
 
       if (clickedCell.isMine) {
-        state.gameOver = true;
+        state.gameState = "lose";
         openAllCells(state.cells);
         alert("you click mine. Game over");
       } else if (clickedCell.nearMineCounter === 0) {
         openNearCells(state.cells, row, col);
       }
+
+      checkWin(state);
     },
 
     resetGame: (state) => {
@@ -90,12 +89,12 @@ export const mineSweeperSlice = createSlice({
           cell.isClicked = false;
         })
       );
-      state.gameOver = false;
+      state.gameState = "inPlaying";
     },
   },
 });
 
-export const { setDifficulty, makeBoard, clickCell, resetGame } =
+export const { setLevel, makeBoard, clickCell, resetGame } =
   mineSweeperSlice.actions;
 
 export default mineSweeperSlice.reducer;

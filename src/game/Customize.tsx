@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { setDifficulty } from "../store/minesweeper/mineSweeperSlice";
+import { setLevel } from "../store/minesweeper/mineSweeperSlice";
 
 const Customize = () => {
   const dispatch = useDispatch();
@@ -25,7 +25,7 @@ const Customize = () => {
     const { width, height, mines } = customInputValues;
     if (width && height && mines) {
       const customValues = [height, width, mines];
-      dispatch(setDifficulty(customValues));
+      dispatch(setLevel(customValues));
     }
   };
 

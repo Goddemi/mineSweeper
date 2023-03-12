@@ -3,12 +3,25 @@ import { Bomb } from "../icon/Icons";
 import { clickCell } from "../store/minesweeper/mineSweeperSlice";
 import { CellType } from "../type/types";
 
-const Cell = ({ cellData }: { cellData: CellType }) => {
-  const { row, col, isClicked, isMine, nearMineCounter } = cellData;
+const Cell = ({
+  cellData,
+  initialClick,
+  setInitialClick,
+}: {
+  cellData: CellType;
+  initialClick: boolean;
+  setInitialClick: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
+  const { isClicked, isMine, nearMineCounter } = cellData;
   const dispatch = useDispatch();
 
   const clickHandler = () => {
-    dispatch(clickCell(cellData));
+    if (initialClick && isMine) {
+      alert("you click mine with first click");
+    } else {
+      setInitialClick(false);
+      dispatch(clickCell(cellData));
+    }
   };
 
   return (
@@ -18,7 +31,6 @@ const Cell = ({ cellData }: { cellData: CellType }) => {
       }`}
       onClick={clickHandler}
     >
-      {" "}
       {isClicked &&
         (isMine ? (
           <span className="text-yellow-300">

@@ -1,6 +1,6 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Sad, Smile } from "../icon/Icons";
+import { Gift, Sad, Smile } from "../icon/Icons";
 import { makeBoard, resetGame } from "../store/minesweeper/mineSweeperSlice";
 import { RootState } from "../store/store";
 import Cell from "./Cell";
@@ -8,30 +8,45 @@ import Cell from "./Cell";
 const GameBoard = () => {
   const dispatch = useDispatch();
   const difficultyLevel = useSelector(
-    (state: RootState) => state.mineSweeper.difficulty
+    (state: RootState) => state.mineSweeper.level
   );
-  const gameOverState = useSelector(
-    (state: RootState) => state.mineSweeper.gameOver
+  const gameState = useSelector(
+    (state: RootState) => state.mineSweeper.gameState
   );
   const cells = useSelector((state: RootState) => state.mineSweeper.cells);
+  const [initialClick, setInitialClick] = useState(true);
 
   const resetHandler = () => {
     dispatch(resetGame());
   };
 
+  console.log(initialClick);
   useEffect(() => {
+    setInitialClick(true);
     dispatch(makeBoard());
   }, [difficultyLevel]);
 
   return (
     <div className="flex flex-col items-center">
       <div className="my-4 cursor-pointer" onClick={resetHandler}>
-        {gameOverState ? <Sad /> : <Smile />}
+        {gameState === "lose" ? (
+          <Sad />
+        ) : gameState === "win" ? (
+          <div className="flex flex-col items-center">
+            <Gift /> <span className="ml-1"> you win!</span>
+          </div>
+        ) : (
+          <Smile />
+        )}
       </div>
       {cells.map((row, i) => (
         <div className="flex">
           {row.map((cellData, j) => (
-            <Cell cellData={cellData} />
+            <Cell
+              cellData={cellData}
+              initialClick={initialClick}
+              setInitialClick={setInitialClick}
+            />
           ))}
         </div>
       ))}

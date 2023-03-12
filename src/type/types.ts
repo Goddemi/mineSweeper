@@ -1,4 +1,6 @@
-export type DifficultyType = "easy" | "normal" | "hard" | number[];
+export type GameStateType = "lose" | "inPlaying" | "win";
+
+export type LevelType = "easy" | "normal" | "hard" | number[];
 
 export interface CellType {
   row: number;
@@ -6,4 +8,10 @@ export interface CellType {
   isClicked: boolean;
   isMine: boolean;
   nearMineCounter: number;
+}
+
+export interface MineSweeperType {
+  level: LevelType;
+  cells: CellType[][];
+  gameState: GameStateType;
 }

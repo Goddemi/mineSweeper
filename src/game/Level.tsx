@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { setDifficulty } from "../store/minesweeper/mineSweeperSlice";
-import { DifficultyType } from "../type/types";
+import { setLevel } from "../store/minesweeper/mineSweeperSlice";
+import { LevelType } from "../type/types";
 import Customize from "./Customize";
 
-const Difficulty = () => {
+const Level = () => {
   const dispatch = useDispatch();
   const [custom, setCustom] = useState(false);
 
@@ -14,10 +14,10 @@ const Difficulty = () => {
     setCustom((prevState) => !prevState);
   };
 
-  const difficultyHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const levelHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
     const target = event.target as HTMLButtonElement;
-    const selectedLevel = target.innerHTML as DifficultyType;
-    dispatch(setDifficulty(selectedLevel));
+    const selectedLevel = target.innerHTML as LevelType;
+    dispatch(setLevel(selectedLevel));
   };
 
   return (
@@ -26,7 +26,7 @@ const Difficulty = () => {
         {difficultyLevel.map((level) => (
           <button
             key={level}
-            onClick={difficultyHandler}
+            onClick={levelHandler}
             className="mx-2 p-3 bg-slate-400 text-white rounded-md cursor-pointer"
           >
             {level}
@@ -44,4 +44,4 @@ const Difficulty = () => {
   );
 };
 
-export default Difficulty;
+export default Level;
