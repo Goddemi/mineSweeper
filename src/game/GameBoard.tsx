@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Gift, Sad, Smile } from "../icon/Icons";
 import { makeBoard, resetGame } from "../store/minesweeper/mineSweeperSlice";
 import { RootState } from "../store/store";
+import { timeReset } from "../store/timer/timerSlice";
 import Cell from "./Cell";
 
 const GameBoard = () => {
@@ -18,6 +19,7 @@ const GameBoard = () => {
 
   //중간의 이모지를 클릭했을 때 게임을 초기화 시키는 기능
   const resetHandler = () => {
+    dispatch(timeReset());
     dispatch(resetGame());
   };
 
