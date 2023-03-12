@@ -14,8 +14,7 @@ export const openNearCells = (
       if (!cell.isClicked && !cell.isMine) {
         cell.isClicked = true;
 
-        //재귀함수를 통해 주변 셀들을 활성화되게 구성
-
+        //재귀함수를 통해 주변 셀들이 클릭되게 구성
         if (cell.nearMineCounter === 0) openNearCells(cells, i, j);
       }
     }

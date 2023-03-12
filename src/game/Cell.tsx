@@ -15,9 +15,11 @@ const Cell = ({
   const { isClicked, isMine, nearMineCounter } = cellData;
   const dispatch = useDispatch();
 
+  //첫번째 클릭한 셀에 지뢰가 있을 경우 경고문을 띄우고 다음 과정을 진행하지 않도록 구현
+  //지뢰가 아닐 경우 '첫번째클릭' 상태값을 false로 바꿔준다.
   const clickHandler = () => {
     if (initialClick && isMine) {
-      alert("you click mine with first click");
+      alert("your first click is mine");
     } else {
       setInitialClick(false);
       dispatch(clickCell(cellData));

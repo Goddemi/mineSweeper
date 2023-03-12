@@ -16,11 +16,11 @@ const GameBoard = () => {
   const cells = useSelector((state: RootState) => state.mineSweeper.cells);
   const [initialClick, setInitialClick] = useState(true);
 
+  //중간의 이모지를 클릭했을 때 게임을 초기화 시키는 기능
   const resetHandler = () => {
     dispatch(resetGame());
   };
 
-  console.log(initialClick);
   useEffect(() => {
     setInitialClick(true);
     dispatch(makeBoard());
