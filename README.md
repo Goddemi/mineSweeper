@@ -1,11 +1,11 @@
 ## Getting Started
 
 ```bash
-npm install or yarn install
+yarn install
 
 and
 
-npm start or yarn start
+yarn start
 ```
 
 ## Stacks
